@@ -193,7 +193,6 @@ export default function RecipesList() {
                   <td>{category.name}</td>
                   <td>{category.creationDate}</td>
                   <td className='d-flex justify-content-end'>
-                    <i className="pointer fa fa-edit text-warning mx-3" aria-hidden="true"></i>
                     <i onClick={()=>handleShow(category.id)} className="pointer fa fa-trash text-danger" aria-hidden="true"></i>
 
                   </td>

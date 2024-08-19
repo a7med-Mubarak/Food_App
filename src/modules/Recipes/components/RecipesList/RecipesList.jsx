@@ -144,7 +144,7 @@ export default function RecipesList() {
   <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
         </Modal.Header>
-        <Modal.Body className=''>
+        <Modal.Body>
 
         <DeleteConfirm deletItem={"Recipe"}></DeleteConfirm>
 
@@ -214,12 +214,13 @@ export default function RecipesList() {
                     </td>
                   <td>{recipe.price}</td>
                   <td>{recipe.description}</td>
-                  <td>{recipe.tag.name}</td>
-
-                  <td className='d-flex justify-content-end'>
-                    <i className=" pointer fa fa-edit text-warning mx-3" aria-hidden="true"></i>
-                    <i onClick={()=>handleShow(recipe.id)} className="pointer fa-hand-pointer fa fa-trash text-danger" aria-hidden="true"></i>
+                  <td>{recipe.tag.name}
+                    <td className='d-flex justify-content-end'>
+                      <i onClick={()=>handleShow(recipe.id)} className="pointer fa-hand-pointer fa fa-trash text-danger" aria-hidden="true"></i>
+                     </td>
                   </td>
+
+
             </tr>
             ))}
 

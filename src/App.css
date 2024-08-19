@@ -76,3 +76,11 @@ body, html {
   margin-top: 10%;
   margin-left: 3%;
 }
+.gg{
+  width: 100%;
+  margin-left: -8%;
+}
+.icon img{
+  width: 25% !important;
+  margin-left: 70%;
+}

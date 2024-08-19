@@ -59,7 +59,7 @@ export default function UsersList() {
           email: emailInput
         }
       });
-      setArrayOfpages(Array(response.data.totalNumberOfPages).fill().map(( _, i) => i + 1));
+      setArrayOfpages(Array.from({ length: response.data.totalNumberOfPages }, (_, i) => i + 1));
       setUsersList(response.data.data);
     } catch (error) {
       console.log(error);
@@ -86,16 +86,24 @@ export default function UsersList() {
     getUsersList(1, 1, nameValue, countryValue, groupsRule, input.target.value);
   };
 
+  const raangPage = (currentPage, totalNumberofPagev) => {
+    if (currentPage <= 6) {
+      return Array.from({ length: Math.min(11, totalNumberofPagev) }, (_, i) => i + 1);
+    }
+    if (currentPage > totalNumberofPagev - 6) {
+      return Array.from({ length: Math.min(11, totalNumberofPagev) }, (_, i) => totalNumberofPagev - 10 + i).filter(page => page > 0);
+    }
+    return Array.from({ length: 11 }, (_, i) => currentPage - 5 + i);
+  };
+
   useEffect(() => {
     getUsersList(1, 2);
   }, []);
 
   return (
     <>
-<div className='gg'>
         <Header imgUrl={headerBg} title={'Users List'} description={'You can now add items that any user can order from the application and you can edit them'}></Header>
-
-</div>
+      
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton />
         <Modal.Body>
@@ -106,7 +114,7 @@ export default function UsersList() {
         </Modal.Footer>
       </Modal>
 
-      <div className='d-flex mx-5 p-2 justify-content-between w-75'>
+      <div className='d-flex mx-5 p-2 justify-content-between'>
         <div className="title-info">
           <h4>Users Table Details</h4>
           <p>You can check all details</p>
@@ -114,7 +122,7 @@ export default function UsersList() {
         <button className='btn btn-success' onClick={() => navigate("/register")}>Add New User</button>
       </div>
 
-      <div className='table-container w-75 mx-5'>
+      <div className='table-container mx-5'>
         <div className="row">
           <div className="col-md-4">
             <input onChange={getNameValue} type="text" placeholder='Search By Name' className='form-control w-75 mx-auto mb-4' />
@@ -161,17 +169,7 @@ export default function UsersList() {
                   <td>{user.email}</td>
                   <td>{user.phoneNumber}</td>
                   <td className='d-flex justify-content-end'>
-                    <Dropdown>
-                      <Dropdown.Toggle variant="inherit" id="dropdown-basic">
-                        <i className="fa-solid fa-list"></i>  
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item className='d-flex justify-content-around' href="#/action-1">
-                          <i className="pointer fa fa-edit text-warning" aria-hidden="true"></i>
-                          <i onClick={() => handleShow(user.id)} className="pointer fa fa-trash text-danger" aria-hidden="true"></i>
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
+                          <i onClick={() => handleShow(user.id)} className="mx-auto pointer fa fa-trash text-danger" aria-hidden="true"></i>
                   </td>
                 </tr>
               ))}
@@ -188,7 +186,7 @@ export default function UsersList() {
               <span className="sr-only">Previous</span>
             </a>
           </li>
-          {arrayOfpages.map((pageNo) => (
+          {raangPage(1, arrayOfpages.length).map((pageNo) => (
             <li key={pageNo} className="page-item" onClick={() => getUsersList(pageNo, 3)}>
               <a className="page-link" href="#">{pageNo}</a>
             </li>
@@ -196,10 +194,10 @@ export default function UsersList() {
           <li className="page-item">
             <a className="page-link" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
+              <span className="sr-only">Next</span>
             </a>
           </li>
         </ul>
       </nav>
     </>
-  );
-}
+  )}

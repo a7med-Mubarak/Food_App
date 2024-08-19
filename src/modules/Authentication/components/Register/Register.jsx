@@ -33,7 +33,7 @@ export default function Login() {
                 <div className="container-fluid bg-overlay">
                     <div className="row vh-100 justify-content-center align-content-center">
                         <div className="w-75 px-5 col-md-5 bg-white p-3 text-center rounded rounded-2">
-                            <img className="w-50" src={logo} alt="" />
+                            <img className="w-50 mx-auto" src={logo} alt="" />
                             <h2 className="text-muted d-flex justify-content-start mt-3">Register</h2>
                             <p className="justify-content-start d-flex text-black-50 mb-4">
                             Welcome Back! Please enter your details
@@ -58,8 +58,10 @@ export default function Login() {
                                         aria-describedby="basic-addon1"
                                         {...register('userName', {
                                             required: 'UserName Is Required',
+                                            message: 'User Should Be Valid String',
+
                                             pattern: {
-                                                value: "",
+                                                
                                                 message: 'User Should Be Valid String',
                                             },
                                         })}
@@ -134,7 +136,6 @@ export default function Login() {
 
 
                         <div className='w-50 mx-5 '>
-                            {/* Email Field */}
                                 <div className="input-group mb-2 ">
                                     <span className="input-group-text" id="basic-addon1">
                                         <i className="fa fa-envelope" aria-hidden="true"></i>
@@ -190,7 +191,6 @@ export default function Login() {
 
 
 
-                                {/* Password Field */}
                                 <div className="input-group mb-2 mt-4">
                                     <span className="input-group-text" id="basic-addon1">
                                         <i className="fa fa-key" aria-hidden="true"></i>
@@ -247,7 +247,6 @@ export default function Login() {
 
                               
 
-                                {/* Links */}
                                 <div className="links d-flex justify-content-end">
                                     <Link
                                         to="/login"
@@ -257,7 +256,6 @@ export default function Login() {
                                     </Link>
                                 </div>
 
-                                {/* Submit Button */}
                                 <button
                                     type="submit"
                                     className="justify-content-center btn btn-success d-flex w-100 my-3"
