@@ -24,7 +24,7 @@ import VerifyAcc from './modules/Authentication/components/VerifyAcc/VerifyAcc';
 function App() {
 
 
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
     {
       path: "",
       element: <AuthLayout/>,
